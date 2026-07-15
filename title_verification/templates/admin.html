@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+<div class="card p-4 shadow">
+
+<h3 class="text-center">Admin Dashboard</h3>
+
+<!-- 🔥 Navigation Buttons -->
+<div class="d-flex justify-content-between mb-3">
+
+    <a href="{{ url_for('index') }}" class="btn btn-primary">
+        🏠 Home
+    </a>
+
+    <a href="{{ url_for('analytics') }}" class="btn btn-info">
+        📊 Analytics
+    </a>
+
+    <a href="{{ url_for('logout') }}" class="btn btn-danger">
+        🚪 Logout
+    </a>
+
+</div>
+
+<hr>
+
+<hr>
+
+<!-- Statistics -->
+<div class="row text-center mb-4">
+    <div class="col">
+        <div class="alert alert-primary">
+            Total Submissions <br>
+            <strong>{{ total_submissions }}</strong>
+        </div>
+    </div>
+    <div class="col">
+        <div class="alert alert-danger">
+            Total Duplicates <br>
+            <strong>{{ total_duplicates }}</strong>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<!-- Add New Title -->
+<h5>Add New Registered Title</h5>
+<form method="POST" action="{{ url_for('add_title') }}">
+    <div class="input-group mb-3">
+        <input type="text" name="new_title" class="form-control" required>
+        <button class="btn btn-success">Add</button>
+    </div>
+</form>
+
+<p class="text-muted">
+    (Registered titles are stored internally and not publicly displayed.)
+</p>
+
+<hr>
+
+</div>
+</div>
+
+</body>
+</html>

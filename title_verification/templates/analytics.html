@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Statistics & Analytics</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-4">
+
+<h2 class="text-center mb-4">System Analytics</h2>
+
+<div class="row text-center mb-4">
+
+<div class="col-md-3">
+<div class="card p-3 shadow">
+<h5>Total Submissions</h5>
+<h3>{{ total }}</h3>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card p-3 shadow">
+<h5>Acceptable Titles</h5>
+<h3>{{ acceptable }}</h3>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card p-3 shadow">
+<h5>Duplicates</h5>
+<h3>{{ duplicate }}</h3>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card p-3 shadow">
+<h5>Rejected</h5>
+<h3>{{ rejected }}</h3>
+</div>
+</div>
+
+</div>
+
+
+<div class="card p-4 shadow">
+<h4 class="text-center">Submission Trend</h4>
+<canvas id="trendChart"></canvas>
+</div>
+
+<div class="mt-4 text-center">
+<a href="{{ url_for('admin') }}" class="btn btn-secondary">
+Back to Dashboard
+</a>
+</div>
+
+</div>
+
+
+<script>
+
+    const labels = JSON.parse('{{ dates | tojson | safe }}');
+    const dataCounts = JSON.parse('{{ counts | tojson | safe }}');
+    
+    const ctx = document.getElementById('trendChart').getContext('2d');
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Submissions',
+                data: dataCounts,
+                borderWidth: 2,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Top 5 Similar Titles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #4e73df, #1cc88a);
+            min-height: 100vh;
+        }
+
+        .card {
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body class="d-flex align-items-center justify-content-center">
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+
+            <div class="card shadow-lg p-4">
+
+                <h3 class="mb-4 text-center">Top 5 Similar Titles</h3>
+
+                <table class="table table-bordered table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Title</th>
+                            <th>Edit</th>
+                            <th>Phonetic</th>
+                            <th>TF-IDF</th>
+                            <th>Final</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in top_5 %}
+                            <tr {% if item.final_score >= 0.9 %} class="table-danger" {% endif %}>
+                                <td>{{ item.title }}</td>
+                                <td>{{ item.edit_score }}</td>
+                                <td>{{ item.phonetic_score }}</td>
+                                <td>{{ item.tfidf_score }}</td>
+                                <td><strong>{{ item.final_score }}</strong></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="text-center">
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">
+                        ← Back
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
